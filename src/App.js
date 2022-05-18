@@ -3,6 +3,7 @@ import { Counter } from './features/counter/Counter';
 import './App.css';
 import Header from './Header.js';
 import Sidebar from './Sidebar.js';
+import Feed from './Feed.js';
 
 function App() {
   return (
@@ -11,8 +12,7 @@ function App() {
         <Header />
         <div className="app__body">
           <Sidebar />
-          {/* Sidebar */}
-          {/* Feed */}
+          <Feed />
           {/* Widgets */}
         </div>
       </header>
