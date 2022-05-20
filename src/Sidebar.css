@@ -1,5 +1,10 @@
 .sidebar {
     flex: 0.2;
+    position: sticky;
+    top: 80px;
+    border-radius: 10px;
+    text-align: center;
+    height: fit-content;
 }
 
 .sidebar__avatar {

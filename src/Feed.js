@@ -9,10 +9,15 @@ import CalendarViewDayIcon from "@material-ui/icons/CalendarViewDay";
 import Posts from "./Posts.js";
 import { db } from "./firebase";
 import firebase from "firebase/compat/app";
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
+import FlipMove from "react-flip-move";
 
 function Feed() {
     const [input, setInput] = useState("");
     const [posts, setPosts] = useState([]);
+
+    const user = useSelector(selectUser);
 
     useEffect(() => {
         db.collection("posts")
@@ -31,10 +36,10 @@ function Feed() {
         e.preventDefault();
 
         db.collection("posts").add({
-            name: "Atul Bhatt",
-            description: "pesca-pescatarian",
+            name: user.displayName,
+            description: user.email,
             message: input,
-            photoUrl: "https://static.wikia.nocookie.net/villains/images/3/37/Anton-chigurh-no-country-for-old-men.jpg",
+            photoUrl: user.photoUrl,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
@@ -63,15 +68,17 @@ function Feed() {
                 </div>
             </div>
             {/* Posts */}
-            {posts.map(({id, data: { name, description, message, photoUrl} }) => (
-                <Posts
-                    key={id}
-                    name={name}
-                    description={description}
-                    message={message}
-                    photoUrl={photoUrl}
-                />
-            ))}
+            <FlipMove>
+                {posts.map(({id, data: { name, description, message, photoUrl} }) => (
+                    <Posts
+                        key={id}
+                        name={name}
+                        description={description}
+                        message={message}
+                        photoUrl={photoUrl}
+                    />
+                ))}
+            </FlipMove>
         </div>
     );
 }

@@ -1,9 +1,13 @@
 import React from 'react';
 import './Sidebar.css';
 import { Avatar } from '@material-ui/core'
+import { useSelector } from "react-redux";
+import { selectUser } from "./features/userSlice";
 
 
 const Sidebar = () => {
+
+    const user = useSelector(selectUser);
 
     const recentItems = item => {
         return (
@@ -18,9 +22,9 @@ const Sidebar = () => {
         <div className='sidebar'>
             <div className='sidebar__top'>
                 <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470" alt='' />
-                <Avatar className="sidebar__avatar" src="https://static.wikia.nocookie.net/villains/images/3/37/Anton-chigurh-no-country-for-old-men.jpg" alt="Anton Chigurh" />
-                <h2>Atul Bhatt</h2>
-                <h4>atulbhatt61@gmail.com</h4>
+                <Avatar className="sidebar__avatar" src={user.photoUrl} alt="Anton Chigurh" > { user.email[0] } </Avatar>
+                <h2>{user.displayName}</h2>
+                <h4>{user.email}</h4>
             </div>
             <div className="sidebar__stats">
                 <div className="sidebar__stat">
